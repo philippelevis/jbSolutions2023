@@ -6,7 +6,7 @@ def move(array,x,y,amount):
     array[x] = array[x]-amount
     array[y] = array[y]+amount
 
-array = [6, 7, 1, 4, 2]
+array = [6, 7, 1 ,4, 2]
 
 sorted_array = []
 
@@ -14,11 +14,9 @@ for i in range(0,len(array)):
     sorted_array.append([array[i],i])
 sorted_array.sort(key=lambda x: -x[0])
 
-print(sorted_array)
+#print(sorted_array)
 
 moves = []
-
-#print(sorted_array)
 
 def getaveragesrt(array):
     sum = 0
@@ -45,12 +43,19 @@ def main():
             #save the index so we dont execute the same move twice
             trgindex = getnonequalsrt(sorted_array, target,i+1)
             #add the move to moves
-            moves.append([sorted_array[i][1],sorted_array[trgindex][1],sorted_array[i][0]-target])
+            moves.append([sorted_array[i][1],sorted_array[trgindex][1],int(sorted_array[i][0]-target)])
             #move in the sorted array to represent the situation
             movesrt(sorted_array,i,trgindex,sorted_array[i][0]-target)
 
 main()
-print(moves)
-print(sorted_array)
+print(len(moves))
 
-print(execute_moves(array,moves))
+def formatmoves(moves):
+    for i in moves:
+        i[0] = i[0]+1
+        i[1] = i[1]+1
+
+formatmoves(moves)
+
+for i in moves:
+    print(*i)

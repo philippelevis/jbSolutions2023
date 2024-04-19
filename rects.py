@@ -1,41 +1,31 @@
-n = int(input())
-a = [int(i) for i in input().split()]
-a.sort()
-if n < 4:
-    print(-1)
+lst = [4, 7, 2, 5, 8, 4, 2, 6, 8, 1]
+#lst = [1, 1, 1, 1]
+#lst = [1, 2, 3, 4, 5, 6]
 
-def removeduplicate(data):
-    countdict = {}
-    for element in data:
-        if element in countdict.keys():
-             
-            # increasing the count if the key(or element)
-            # is already in the dictionary
-            countdict[element] += 1
+lst = [int(i) for i in input().split()]
+
+def clear_list(lst):
+    # Create a dictionary to count the occurrences of each element
+    count_dict = {}
+    for num in lst:
+        if num in count_dict:
+            count_dict[num] += 1
         else:
-            # inserting the element as key  with count = 1
-            countdict[element] = 1
-    data.clear()
-    for key in countdict.keys():
-        data.append(key)
+            count_dict[num] = 1
+    # Iterate through the dictionary and remove elements that have a count less than 2
+    for key, value in count_dict.items():
+        if value < 2:
+            lst.remove(key)
 
-b = []
-for i in range(1, len(a)-1):
-    if a[i] == a[i+1] or a[i] == a[i-1]:
-        b.append(a[i])
+    return lst
 
-if len(a) > 1 and a[0] == a[1]:
-    b.append(a[0])
-if len(a) > 1 and a[-1] == a[-2]:
-    b.append(a[-1])
-b.sort()
-c = b[:]
-removeduplicate(c)
-if n < 4:
-    pass
-elif len(c) == 0:
+
+last_4 = sorted(clear_list((lst)))[-4:]
+#print(last_4)
+
+if len(last_4) != 4:
     print(-1)
-elif len(c) == 1:
-    print(c[-1]**2)
-elif n > 4:
-    print(c[-1]*c[-2])
+elif last_4[1] == last_4[-1]:
+    print(last_4[1]**2)
+else:
+    print(last_4[1]*last_4[-1])
